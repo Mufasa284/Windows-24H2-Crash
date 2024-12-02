@@ -1,0 +1,193 @@
+*******************************************************************************
+*                                                                             *
+*                        Bugcheck Analysis                                    *
+*                                                                             *
+*******************************************************************************
+
+DPC_WATCHDOG_VIOLATION (133)
+The DPC watchdog detected a prolonged run time at an IRQL of DISPATCH_LEVEL
+or above.
+Arguments:
+Arg1: 0000000000000001, The system cumulatively spent an extended period of time at
+	DISPATCH_LEVEL or above.
+Arg2: 0000000000001e00, The watchdog period (in ticks).
+Arg3: fffff804827c33a0, cast to nt!DPC_WATCHDOG_GLOBAL_TRIAGE_BLOCK, which contains
+	additional information regarding the cumulative timeout
+Arg4: 0000000000000000
+
+Debugging Details:
+------------------
+
+*************************************************************************
+***                                                                   ***
+***                                                                   ***
+***    Either you specified an unqualified symbol, or your debugger   ***
+***    doesn't have full symbol information.  Unqualified symbol      ***
+***    resolution is turned off by default. Please either specify a   ***
+***    fully qualified symbol module!symbolname, or enable resolution ***
+***    of unqualified symbols by typing ".symopt- 100". Note that     ***
+***    enabling unqualified symbol resolution with network symbol     ***
+***    server shares in the symbol path may cause the debugger to     ***
+***    appear to hang for long periods of time when an incorrect      ***
+***    symbol name is typed or the network symbol server is down.     ***
+***                                                                   ***
+***    For some commands to work properly, your symbol path           ***
+***    must point to .pdb files that have full type information.      ***
+***                                                                   ***
+***    Certain .pdb files (such as the public OS symbols) do not      ***
+***    contain the required information.  Contact the group that      ***
+***    provided you with these symbols if you need this command to    ***
+***    work.                                                          ***
+***                                                                   ***
+***    Type referenced: TickPeriods                                   ***
+***                                                                   ***
+*************************************************************************
+
+KEY_VALUES_STRING: 1
+
+    Key  : Analysis.CPU.mSec
+    Value: 1484
+
+    Key  : Analysis.Elapsed.mSec
+    Value: 1501
+
+    Key  : Analysis.IO.Other.Mb
+    Value: 0
+
+    Key  : Analysis.IO.Read.Mb
+    Value: 1
+
+    Key  : Analysis.IO.Write.Mb
+    Value: 0
+
+    Key  : Analysis.Init.CPU.mSec
+    Value: 328
+
+    Key  : Analysis.Init.Elapsed.mSec
+    Value: 7399
+
+    Key  : Analysis.Memory.CommitPeak.Mb
+    Value: 89
+
+    Key  : Analysis.Version.DbgEng
+    Value: 10.0.27725.1000
+
+    Key  : Analysis.Version.Description
+    Value: 10.2408.27.01 amd64fre
+
+    Key  : Analysis.Version.Ext
+    Value: 1.2408.27.1
+
+    Key  : Bugcheck.Code.LegacyAPI
+    Value: 0x133
+
+    Key  : Bugcheck.Code.TargetModel
+    Value: 0x133
+
+    Key  : Dump.Attributes.AsUlong
+    Value: 21008
+
+    Key  : Dump.Attributes.DiagDataWrittenToHeader
+    Value: 1
+
+    Key  : Dump.Attributes.ErrorCode
+    Value: 0
+
+    Key  : Dump.Attributes.KernelGeneratedTriageDump
+    Value: 1
+
+    Key  : Dump.Attributes.LastLine
+    Value: Dump completed successfully.
+
+    Key  : Dump.Attributes.ProgressPercentage
+    Value: 0
+
+    Key  : Failure.Bucket
+    Value: 0x133_ISR_nt!KeAccumulateTicks
+
+    Key  : Failure.Hash
+    Value: {65350307-c3b9-f4b5-8829-4d27e9ff9b06}
+
+    Key  : Stack.Pointer
+    Value: ISR
+
+
+BUGCHECK_CODE:  133
+
+BUGCHECK_P1: 1
+
+BUGCHECK_P2: 1e00
+
+BUGCHECK_P3: fffff804827c33a0
+
+BUGCHECK_P4: 0
+
+FILE_IN_CAB:  120224-12656-01.dmp
+
+DUMP_FILE_ATTRIBUTES: 0x21008
+  Kernel Generated Triage Dump
+
+FAULTING_THREAD:  ffffae8b7d3d1080
+
+DPC_TIMEOUT_TYPE:  DPC_QUEUE_EXECUTION_TIMEOUT_EXCEEDED
+
+BLACKBOXBSD: 1 (!blackboxbsd)
+
+
+BLACKBOXNTFS: 1 (!blackboxntfs)
+
+
+BLACKBOXPNP: 1 (!blackboxpnp)
+
+
+BLACKBOXWINLOGON: 1
+
+CUSTOMER_CRASH_COUNT:  1
+
+PROCESS_NAME:  Plex Media Sca
+
+STACK_TEXT:  
+fffff804`13b61b48 fffff804`81b75129     : 00000000`00000133 00000000`00000001 00000000`00001e00 fffff804`827c33a0 : nt!KeBugCheckEx
+fffff804`13b61b50 fffff804`81b67b61     : 00000000`00000000 00000000`00000002 00000000`00000000 00000000`002a74b0 : nt!KeAccumulateTicks+0x589
+fffff804`13b61bc0 fffff804`81b67725     : 00000000`00194e3e 00000000`00000000 00000065`38fae05a 00000000`0000000d : nt!KiUpdateRunTime+0xc9
+fffff804`13b61c40 fffff804`81a6e8fe     : fffff804`82610980 00000000`00000000 fffff804`121a59c8 fffff804`82720650 : nt!KiUpdateTime+0x2b5
+fffff804`13b61dd0 fffff804`81a702ad     : fffff804`82610980 00000000`00000000 fffff804`82610a30 fffff804`8278dee8 : nt!KeClockInterruptNotify+0x66e
+fffff804`13b61f50 fffff804`81e7bc4e     : 00000000`00000002 fffff804`82610980 fffff804`13b593d0 00000065`3911adae : nt!KiCallInterruptServiceRoutine+0x2ed
+fffff804`13b61fb0 fffff804`81e7c45c     : ffffae8b`6414fa10 fffff804`13b59450 00000000`00000000 00000000`00000000 : nt!KiInterruptSubDispatchNoLockNoEtw+0x4e
+fffff804`13b593d0 fffff804`81b6ddd2     : 00000000`00000000 ffffae8b`7f21c8d0 fffff804`13b59660 ffffe301`2c556180 : nt!KiInterruptDispatchNoLockNoEtw+0x3c
+fffff804`13b59560 fffff804`81a12a52     : 00000009`b9ef2d49 00000000`00000001 fffff804`13b59a48 00000000`00000000 : nt!KiChooseTargetProcessor+0x9e2
+fffff804`13b598b0 fffff804`81a12006     : ffffae8b`83dea080 ffffae8b`7f21c250 ffffae8b`7b016b10 00000006`00000000 : nt!KiDeferredReadySingleThread+0x832
+fffff804`13b59a20 fffff804`81aef6d1     : fffff804`00000000 fffff804`00000001 fffff804`00000000 ffffae8b`00000002 : nt!KiProcessThreadWaitList+0x106
+fffff804`13b59ac0 fffff804`81af0353     : fffff804`121a0280 00000000`00000006 fffff804`13b59dd0 fffff804`121a3320 : nt!KiProcessExpiredTimerList+0x101
+fffff804`13b59bf0 fffff804`81ab9d61     : fffff804`1219c180 00000000`00000020 fffff804`1219c180 00000000`0000000f : nt!KiTimerExpiration+0x2e3
+fffff804`13b59d20 fffff804`81e81855     : 00000000`00000000 00000000`00000010 ffff8207`9074e970 00000000`00000000 : nt!KiRetireDpcList+0xaf1
+fffff804`13b59fb0 fffff804`81e817ff     : ffff8207`9074ea60 fffff804`81a0c9a5 fffff804`1219c180 fffff804`81b75cab : nt!KxSwapStacksAndRetireDpcList+0x5
+ffff8207`9074e970 fffff804`81a0c9a5     : fffff804`1219c180 fffff804`81b75cab 00000000`00000000 00000000`00000000 : nt!KiPlatformSwapStacksAndCallReturn
+ffff8207`9074e980 fffff804`81e8102b     : 0000021f`8c093bc0 000000df`73bff990 fffff804`82610980 fffff804`82610980 : nt!KiDispatchInterrupt+0x65
+ffff8207`9074e9b0 fffff804`81e7c484     : 00000064`f18c364b ffff8207`9074ea60 00000064`f18c365a 00009585`cae3b550 : nt!KiDpcInterruptBypass+0x1b
+ffff8207`9074e9e0 00007ffb`e9a7dcbf     : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : nt!KiInterruptDispatchNoLockNoEtw+0x64
+000000df`73bff7f8 00000000`00000000     : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : 0x00007ffb`e9a7dcbf
+
+
+SYMBOL_NAME:  nt!KeAccumulateTicks+589
+
+MODULE_NAME: nt
+
+IMAGE_NAME:  ntkrnlmp.exe
+
+IMAGE_VERSION:  10.0.26100.2454
+
+STACK_COMMAND:  .process /r /p 0xffffae8b881d60c0; .thread 0xffffae8b7d3d1080 ; kb
+
+BUCKET_ID_FUNC_OFFSET:  589
+
+FAILURE_BUCKET_ID:  0x133_ISR_nt!KeAccumulateTicks
+
+OSPLATFORM_TYPE:  x64
+
+OSNAME:  Windows 10
+
+FAILURE_ID_HASH:  {65350307-c3b9-f4b5-8829-4d27e9ff9b06}
+
+Followup:     MachineOwner
+---------
